@@ -30,7 +30,7 @@ class Book < ActiveRecord::Base
 
   	self.authors.each do |author|
 
-  		author.lastbook = id
+  		author.lastbook = self.id
 
   		author.save
   	end
