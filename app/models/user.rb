@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
 
-   has_many :loaned_books ,:source => 'LoanedBook'
-   has_many :books, :through =>  :loaned_books 
+  has_many :loaned_books ,:source => 'LoanedBook'
+  has_many :books, :through =>  :loaned_books 
 
-  attr_accessible :limit, :name, :regno, :available
+  attr_accessible :limit, :name, :regno, :available, :admin, :enabled ,:returned
 
   validates :name ,:presence => true,
   				  :length => {:minimum => 4}
@@ -15,29 +15,43 @@ class User < ActiveRecord::Base
   				   :numericality => {:greater_than => 0,
   				                     :only_integers => true
   				                      }   	
-  validates :available , :numericality => {:greater_than_or_equal_to => 0}
+  validates :available , :numericality => {:greater_than_or_equal_to => 0} , :unless => :new_record?
 
+  before_save lambda{self.available = self.limit}
+=begin
+   before_save lambda{self.available = self.limit
+                      self.admin = false if self.admin.nil?
+                      self.enabled = true  if self.enabled.nil?
+                      } , :if => :new_record?
 
-   before_save lambda{self.available = self.limit} , :if => :new_record?
-
+=end
 
    #loan the book to the user
-  def loan_book(book_id)
+  def loan_book(book)
 
  		#update that the user and decrement the appropiate counter
-	    loan = self.loanedbooks.create :book_id => book_id , :start => DateTime.now , :end => DateTime.now + 15.days
+
+    loan = LoanedBook.new
+    loan.start =  DateTime.now
+    loan.end = DateTime.now + 15.days
+    loan.user = self
+    loan.book = book
+    loan.save
+
+=begin
+	    loan = self.loaned_books.new :start => DateTime.now , :end => DateTime.now + 15.days
+      loan.book = book
 	    loan.book.available -= 1
     	self.available -=1
 
 		#save the models
-    	loan.book.save
-    	loan.save
-
-  	end
+#    	loan.save
+      self.save
 
   	#rescue the errors
     rescue => ex
       self.errors[:base] = 'Cannot Load Book ' + ex.message
+=end
 
   end
 
@@ -47,22 +61,20 @@ class User < ActiveRecord::Base
   def return_book(book_id)
 
   	#find the loaned book
-  	loan = self.loanedbooks.find_by_book_id(book_id)
+  	loan = self.loaned_books.find_by_book_id(book_id)
   	
-  	#find the book related to it..
-  	book = Book.find(book_id)
-
-  	#increase the appropriate counters
+  
+    book = Book.find(book_id)#increase the appropriate counters
   	book.available += 1
   	self.available += 1
 
   	#set the book was returned
-	loan.returned = true
+	  loan.returned = true
 
 
 	#save the models
-	loan.save
-   	book.save
+	  loan.save
+    book.save
    	self.save
 
 
