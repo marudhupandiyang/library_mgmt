@@ -16,8 +16,18 @@ class User < ActiveRecord::Base
 
 
   def loan_book(book_id)
+  	
+  	book = Book.find(book_id)
+
+  	if (book.available == 0 )
+  		raise "No Books Available"
+  		false
+  	end
 
     loan = self.loanedbooks.create :book_id => book_id , :start => DateTime.now , :end => DateTime.now + 15.days
+    book.available -= 1
+    book.save
+
     rescue => ex
       self.errors[:base] = 'Cannot Load Book ' + ex.message
 
