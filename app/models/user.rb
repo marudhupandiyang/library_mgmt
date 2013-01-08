@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-   has_many :loanedbooks, :class_name => "LoanedBook"
+   has_many :books, :class_name => "LoanedBook" , :through => 
 
   attr_accessible :limit, :name, :regno, :available
 
@@ -76,3 +76,4 @@ class User < ActiveRecord::Base
   end
 
 end
+ 
