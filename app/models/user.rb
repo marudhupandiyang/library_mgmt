@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-   has_many :books, :class_name => "LoanedBook" , :through => 
+
+   has_many :loaned_books ,:source => 'LoanedBook'
+   has_many :books, :through =>  :loaned_books 
 
   attr_accessible :limit, :name, :regno, :available
 
@@ -13,6 +15,7 @@ class User < ActiveRecord::Base
   				   :numericality => {:greater_than => 0,
   				                     :only_integers => true
   				                      }   	
+  validates :available , :numericality => {:greater_than_or_equal_to => 0}
 
 
    before_save lambda{self.available = self.limit} , :if => :new_record?
@@ -21,25 +24,15 @@ class User < ActiveRecord::Base
    #loan the book to the user
   def loan_book(book_id)
 
-	  	
-	#find the book
-  	book = Book.find(book_id)
-
-  	#check if the book is available else raise error
-  	if (book.available == 0 )
-  		raise "No Books Available"
-	
-	#check if the user has space else raise error
-  	elsif (self.available == 0 )
-  		raise "User has eached his/her limit"
-  	else
-  		#update that the user and decrement the appropiate counter
+ 		#update that the user and decrement the appropiate counter
 	    loan = self.loanedbooks.create :book_id => book_id , :start => DateTime.now , :end => DateTime.now + 15.days
-    	book.available -= 1
+	    loan.book.available -= 1
     	self.available -=1
 
-    	#save the models
-    	book.save
+		#save the models
+    	loan.book.save
+    	loan.save
+
   	end
 
   	#rescue the errors

@@ -2,6 +2,11 @@ class Book < ActiveRecord::Base
 	has_and_belongs_to_many :authors
 	has_and_belongs_to_many :categories
 	has_and_belongs_to_many :tags
+
+  has_many :loaned_books ,:source => 'LoanedBook'
+
+  has_many :users ,:through => :loaned_books
+
   attr_accessible :page, :title, :available
 
 
@@ -13,6 +18,8 @@ class Book < ActiveRecord::Base
                     :presence => true
 
   after_save :author_increment
+
+  validates :available , :numericality => {:greater_than_or_equal_to => 0}
 
   before_save lambda{ self.count = 1 
                       self.available = 1} , :if => :new_record?
