@@ -1,0 +1,25 @@
+
+<h1>Search Books</h1>
+
+
+<% if !@books.nil?  do %>
+	<%= form_for :showbooks_path  do %>
+
+		<%= label_tag 'Search: ' %>
+
+		<%= text_field_tag :book_name %>
+
+		<%= submit_tag 'Submit' %>
+
+
+	<% end %>
+
+	<% else %>
+
+	<% @books.each do |book| %>
+
+	<%=  book.title  %> <br/>
+	
+	<% end %>
+
+<% end %>
