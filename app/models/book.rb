@@ -17,20 +17,25 @@ class Book < ActiveRecord::Base
   before_save lambda{ self.count = 1 
                       self.available = 1} , :if => :new_record?
 
+  #add the desired count to the book
   def add_book(count)
     
-    #if book = Book.find_by_title(title)
+      #increase the count and available for loaning
         self.count += count
         self.available += count
+
+        #save the model
         self.save
-    #end
+    
 
   end
 
   protected
 
+  #each time the book is saved update the author
   def author_increment
 
+    #loop through all the authors and update the lastbook
   	self.authors.each do |author|
 
   		author.lastbook = self.id
