@@ -8,6 +8,11 @@
 </head>
 <body>
 
+	<%= render 'layouts/header'%>
+	<% unless flash.notice.nil? %>
+		<div id="notice"> <%= flash.notice %> </div> <br/>
+	<% end %>
+
 <%= yield %>
 
 </body>

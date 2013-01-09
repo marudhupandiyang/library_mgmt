@@ -1,5 +1,28 @@
 <% @books.each do |book| %>
 
-	<%=  book.title  %> <br/>
+
+<%= form_tag :addbooks %>
+	<%=  book.title + '(Quantity: ' + book.count.to_s + '  )'  %>
+
+	<%= hidden_field_tag 'book_id' , book.id %>
+	<%= text_field_tag 'book_count' %>
+	<%=  submit_tag 'Add Books'  %>
+
+	 <br/>
 	
-<% %>
+<% end %>
+
+<% if @books.empty? %>
+
+<%= form_tag :addbooks %>
+	<%=  book.title + '(Quantity: 0)'  %>
+
+	<%= hidden_field_tag 'book_id' , 0 %>
+	<%= text_field_tag 'book_count' %>
+	<%=  submit_tag 'Create New Books' , 'create' %>
+
+	 <br/>
+	
+<% end %>
+
+<% end %>

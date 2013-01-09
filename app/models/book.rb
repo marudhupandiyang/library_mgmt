@@ -7,7 +7,7 @@ class Book < ActiveRecord::Base
 
   has_many :users ,:through => :loaned_books
 
-  attr_accessible :page, :title, :available, :price ,:count
+  attr_accessible :page, :title, :available, :price ,:count ,:authors
 
 
 
@@ -28,10 +28,28 @@ class Book < ActiveRecord::Base
   validates :price , :presence => true , :numericality => {:greater_than_or_equal_to => 0}
 
   after_save :author_increment
+  
+  #validate that atleast one author must be present
 
-  before_save lambda{ self.count = 1 if :count.nil?
+  validates_presence_of :authors
+  validates_presence_of :categories
+  validates_presence_of :tags
+
+  validates_associated :authors
+  validates_associated :categories
+  validates_associated :tags
+
+  before_save lambda{ 
+    
+                      authors.each do |author|
+                          author.associated = 1
+                      end
+
+                      self.count = 1 if :count.nil?
                       self.available = self.count
                       } , :if => :new_record?
+
+
 
   #add the desired count to the book
   def add_book(count)

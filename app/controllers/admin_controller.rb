@@ -1,14 +1,17 @@
 class AdminController < ApplicationController
+
   def index
 
-  	unless (params[:book_name].nil?) 
-  		@books = Books.find_by_title(params[:book_name])
-  	end
-  	
   end
 
   def show
-  	@books = Books.find_by_title(params[:book_name])
+  	@books = Book.find_all_by_title(params[:book_name])
+  end
+
+  def addbook
+  	(Book.find(params[:book_id])).add_book(Integer(params[:book_count]))
+  	flash.now[:notice] = 'Books added Sucessfully'
+  	render :index 
   end
 
 end

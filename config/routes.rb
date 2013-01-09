@@ -1,8 +1,11 @@
 Library3::Application.routes.draw do
   
-  match 'admin/show' => "admin#show" ,:as => :showbooks
-  get "admin/index"
+  match '/show' => "admin#show" ,:as => :showbooks , :via => [:post]
 
+  match "/search" => "admin#index" , :as => :searchbooks, :via => [:get]
+
+
+  match "/addbooks" => 'admin#addbook' , :as => :addbooks , :via => [:post]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
