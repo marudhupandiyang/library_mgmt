@@ -1,0 +1,16 @@
+
+<% unless @author.errors.empty? %>
+	<div id="error"> <%= @author.errors.full_messages %> </div> <br/>
+<% end %>
+
+
+<%= form_for @author do |f| %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<%= f.submit  %>
+
+<% end %>
+
+<%= link_to 'Back' ,authors_path %>

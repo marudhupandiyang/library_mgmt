@@ -1,0 +1,19 @@
+
+<% unless @category.errors.empty? %>
+	<div id="error"> <%= @category.errors.full_messages %> </div> <br/>
+<% end %>
+
+
+<%=  form_for @category do |cat|%>
+
+	<%= cat.label :name  %>
+
+	<%= cat.text_field :name %>
+
+	<%= cat.submit %>
+
+<% end %>
+
+
+
+<%= link_to 'Back' , categories_path %>

@@ -1,0 +1,14 @@
+
+
+<%= link_to 'Add Category' , new_category_path %>
+
+<h2> Existing Categories </h2>
+
+<% @categories.each do |cat| %>
+
+	<li> <%= cat.name %>
+		<%= link_to 'edit' , category_path(cat) %>
+		<%= link_to 'delete' , category_path(cat) , :method => :delete %>
+	</li>
+<% end %>
+

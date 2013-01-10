@@ -1,13 +1,53 @@
 Library3::Application.routes.draw do
 
-	root :to => 'admin#index'
-  
-  match '/show' => "admin#show" ,:as => :showbooks , :via => [:post]
+  root :to => 'admin#index'
 
-  match "/search" => "admin#index" , :as => :searchbooks, :via => [:get]
+  resources :authors
+  resources :categories
+  resources :tags
 
 
-  match "/addbooks" => 'admin#addbook' , :as => :addbooks , :via => [:post]
+  # get "tags/destroy"
+
+  # get "tags/new"
+
+  # get "tags/index"
+
+  # get "tags/edit"
+
+  # get "categories/destroy"
+
+  # get "categories/new"
+
+  # get "categories/index"
+
+  # get "categories/edit"
+
+  # get "author/destroy"
+
+  # get "author/new"
+
+  # get "author/index"
+
+  # get "author/edit"
+
+
+
+
+  # match '/show' => "admin#show" ,:as => :showbooks , :via => [:post]
+
+  # match "/search" => "admin#index" , :as => :searchbooks, :via => [:get]
+
+
+  # match "/addbooks" => 'admin#addbook' , :as => :addbooks , :via => [:post]
+
+  # match '/addauthor' => 'admin#addAuthor' ,:as => :addauthor , :via => [:post ]
+
+  # match '/newauthor' => 'admin#newAuthor' ,:as => :newauthor , :via => [:get ]
+
+  # match '/deleteauthor/:id' => 'admin#destroyAuthor' ,:as => :deleteauthor , :via => [:get ]
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

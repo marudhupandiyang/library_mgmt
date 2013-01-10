@@ -1,11 +1,11 @@
-
+<br/><br/>	
 
 
 
 <h1>Search Books</h1>
 
 
-	<%= form_tag  :showbooks   do %>
+	<%= form_tag  ''  do %>
 
 		<%= label_tag 'Search: ' %>
 
@@ -29,3 +29,16 @@
 
 		<%=  'Active Users:' + 	@active_users %> <br/>
 
+<br/><br/>	
+
+
+
+<%= link_to "Add Author" , new_author_path %> 
+<%= link_to "Add Category" , new_category_path %>
+<%= link_to "Add Tag" , new_tag_path %>
+
+<br/><br/>
+
+<%= link_to "See all Authors" , authors_path %> 
+<%= link_to "See all Categories" , categories_path %>
+<%= link_to "See all Tags" , tags_path %>

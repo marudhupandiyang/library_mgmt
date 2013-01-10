@@ -1,0 +1,16 @@
+
+<% unless @tag.errors.empty? %>
+	<div id="error"> <%= @tag.errors.full_messages %> </div> <br/>
+<% end %>
+
+
+<%= form_for @tag do |f| %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<%= f.submit  %>
+
+<% end %>
+
+<%= link_to 'Back' ,tags_path %>

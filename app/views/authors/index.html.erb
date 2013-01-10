@@ -1,0 +1,11 @@
+
+	<h2> Existing Authors </h2>
+
+	<%= link_to 'Add Author' , new_author_path %>
+
+	<% getAuthors.each do |author| %>
+		<li > <%= author.name  %> 
+			<%= link_to "edit" ,author_path(author) %>
+
+			<%= link_to "delete" ,author_path(author) ,:method => :delete %> </li>
+	<% end %>
