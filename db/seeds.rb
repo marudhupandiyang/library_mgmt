@@ -12,51 +12,30 @@ user = User.create([{:name => "admin" , :limit => 1, :regno => '123456' ,:admin 
 user = User.create([{:name => "Marudhu" , :limit => 4, :regno => '08MS134'}])
 
 
-book = Book.create([{:title => 'Harry Potter' , :page => 250 , :count => 10 ,:price => 100}, {:title => 'Basic C' , :page => 150 , :count => 10 ,:price => 30}, {:title => 'Basic C plus plus' , :page => 170 , :count => 10 ,:price => 50}	])
+book = Book.new({:title => 'Harry Potter' , :page => 250 , :count => 10 ,:price => 100})
 
-#add a category for story books
-book = Book.find_by_title('Harry Potter')
 
-puts 'Inspecting Found book'
 puts book.inspect
 
-category = book.categories.new
-category.name = 'Stories'
+book.categories.build({:name => 'Stories'})
+book.tags.build({:name => 'Harry Potter'})
+book.authors.build({:name => 'Rowling'})
+book.save
 
-tag = book.tags.new
-tag.name= 'HarryPotter'
+book = Book.new({:title => 'Basic C' , :page => 150 , :count => 10 ,:price => 30})
 
-book.categories.build
-book.tags.build
+book.categories.build({:name => 'Programming'})
+book.tags.build({:name => 'C'})
+book.authors.build({:name => 'Srinivasan'})
 book.save
 
 
-#add categories ,tags for Programming
-book = Book.find_by_title('Basic C')
 
-category = book.categories.new
-category.name = 'Programming'
+book = Book.new( {:title => 'Basic C plus plus' , :page => 170 , :count => 10 ,:price => 50})
 
-tag = book.tags.new
-tag.name = 'C'
-
-book.categories.build
-book.tags.build
-book.save
-
-
-#add categories ,tags for Programming
-book = Book.find_by_title('Basic C plus plus')
-
-category = book.categories.new
-category.name = 'Programming'
-
-tag = book.tags.new
-tag.name = 'C plus plus'
-
-
-book.categories.build
-book.tags.build
+book.categories.build({:name => 'Programming'})
+book.tags.build({:name => 'C plus plus'})
+book.authors.build({:name => 'Rama'})
 book.save
 
 puts 'Admin adds 10 more books '

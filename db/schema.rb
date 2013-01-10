@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108131731) do
+ActiveRecord::Schema.define(:version => 20130110072400) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -57,8 +57,9 @@ ActiveRecord::Schema.define(:version => 20130108131731) do
     t.datetime "start"
     t.datetime "end"
     t.boolean  "returned"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.datetime "returneddoj"
   end
 
   add_index "loaned_books", ["user_id"], :name => "index_loaned_books_on_user_id"

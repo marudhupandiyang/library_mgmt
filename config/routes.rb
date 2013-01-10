@@ -1,4 +1,6 @@
 Library3::Application.routes.draw do
+
+	root :to => 'admin#index'
   
   match '/show' => "admin#show" ,:as => :showbooks , :via => [:post]
 

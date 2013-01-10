@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   def return_book(book_id)
 
   	#find the loaned book
-  	loan = self.loaned_books.find_by_book_id(book_id)
+  	loan = self.loaned_books.where('book_id = ' + book_id + ' and returned = false')
   	
   
     book = Book.find(book_id)#increase the appropriate counters
@@ -70,6 +70,7 @@ class User < ActiveRecord::Base
 
   	#set the book was returned
 	  loan.returned = true
+	  loan.returneddoj = DateTime.now
 
 
 	#save the models
