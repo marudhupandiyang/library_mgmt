@@ -75,16 +75,16 @@ puts 'Current available count is : ' + book.available.to_s
 puts 'Student Returns a book'
 trans = Transcation.find(1)
 
-trans.return_book(book.id)
+trans.return_book
 
-user = User.find(User.find_by_name("Marudhu"))
+user = Auth.find_by_regno('123456')
 
 book = Book.find(1)
 puts 'Books available count is ' + book.available.to_s
 
 puts 'Status of TranscaTions'
-user.transcations.each do |loan|
-	puts loan.returned.to_s + ' '
+user.transcations.each do |trans|
+	puts trans.returned.to_s + ' '
 end
 
 puts 'Finding Books by Categories'

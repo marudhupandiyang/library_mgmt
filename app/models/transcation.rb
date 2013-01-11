@@ -40,7 +40,7 @@ class Transcation < ActiveRecord::Base
     self.book = Book.find(book_id)
 
     self.book.available -=1 
-    self.available -=1
+    self.auth.available -=1
     self.book.save
     self.save
 

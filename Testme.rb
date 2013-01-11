@@ -1,91 +1,62 @@
+# # This file should contain all the record creation needed to seed the database with its default values.
+# # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# #
+# # Examples:
+# #
+# #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+# #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-puts '\n\nAdding a Admin user called admin \n'
+puts 'Creating Admin'
+Auth.create([{:email => 'marudhu@devbrother.com' ,:password => 'admin0123', :password_confirmation => 'admin0123' , :name => "Admin" , :limit => 1, :regno => '000000' ,:admin => true}])
 
-user = User.create([{:name => "admin" , :limit => 1, :regno => '123456' ,:admin => true}])
-
-puts '\n\nAdding a user called Marudhu with limit 4\n'
-
-user = User.create([{:name => "Marudhu" , :limit => 4, :regno => '08MS134'}])
-
-puts 'User.all.inspect result\n'
-puts User.all.inspect
+puts 'Creating Normal user'
+Auth.create([{:email => 'marudhu@gmail.com' ,:password => 'test0123', :password_confirmation => 'test0123' , :name => "Marudhu" , :limit => 4, :available => 4, :regno => '123456' ,:admin => true}])
 
 
-puts '\n\nAdding a three books\n'
 
-book = Book.create([{:title => 'Harry Potter' , :page => 250 , :count => 10 ,:price => 100}, {:title => 'Basic C' , :page => 150 , :count => 10 ,:price => 30}, {:title => 'Basic C plus plus' , :page => 170 , :count => 10 ,:price => 50}	])
+book = Book.new({:title => 'Harry Potter' , :page => 250 , :quantity => 10 ,:price => 100})
 
-puts '\nBook.errors\n'
-book.each do |b|
-	b.errors.full_messages
-end
 
-puts '\nBook.all.inspect result\n'
-Book.all.inspect
-
-puts '\nAdding categories and tags to the books'
-
-#add a category for story books
-book = Book.find_by_title('Harry Potter')
-
-puts 'Inspecting Found book'
 puts book.inspect
 
-category = book.categories.new
-category.name = 'Stories'
+book.categories.build({:name => 'Stories'})
+book.tags.build({:name => 'Harry Potter'})
+book.authors.build({:name => 'Rowling'})
+book.save
 
-tag = book.tags.new
-tag.name= 'HarryPotter'
+book = Book.new({:title => 'Basic C' , :page => 150 , :quantity => 10 ,:price => 30})
 
-book.categories.build
-book.tags.build
+book.categories.build({:name => 'Programming'})
+book.tags.build({:name => 'C'})
+book.authors.build({:name => 'Srinivasan'})
 book.save
 
 
-#add categories ,tags for Programming
-book = Book.find_by_title('Basic C')
 
-category = book.categories.new
-category.name = 'Programming'
+book = Book.new( {:title => 'Basic C plus plus' , :page => 170 , :quantity => 10 ,:price => 50})
 
-tag = book.tags.new
-tag.name = 'C'
-
-book.categories.build
-book.tags.build
+book.categories.build({:name => 'Programming'})
+book.tags.build({:name => 'C plus plus'})
+book.authors.build({:name => 'Rama'})
 book.save
 
+puts 'Admin adds 10 more books '
+book = Book.find_by_title('Harry Potter')
+book.add_book(10)
 
-#add categories ,tags for Programming
-book = Book.find_by_title('Basic C plus plus')
-
-category = book.categories.new
-category.name = 'Programming'
-
-tag = book.tags.new
-tag.name = 'C plus plus'
-
-
-book.categories.build
-book.tags.build
-book.save
-
-
-puts '\nBook.all.inspect result\n'
-Book.all.inspect
 
 
 
 book = Book.find(1)
 puts 'Available count ' + book.available.to_s
 
-user = User.find_by_regno("123456"))
+user = Auth.find_by_regno("123456")
 puts 'User Name: ' + user.name
 puts 'User currently has ' + user.transcations.count.to_s + ' Transcations'
 
 puts 'Issuing ' + book.title + ' book to ' + user.name 
 
-trans = Transcations.new
+trans = Transcation.new
 trans.issue(book.id,user.regno)
 
 puts 'User currently has ' + user.transcations.count.to_s + ' Transcations'
@@ -101,19 +72,20 @@ book.add_book(10)
 book = Book.find_by_title('Harry Potter')
 puts 'Current available count is : ' + book.available.to_s
 
+
 puts 'Student Returns a book'
+trans = Transcation.find(1)
+
+trans.return_book
+
 user = Auth.find_by_regno('123456')
-
-user.return_book(book.id)
-
-user = User.find(User.find_by_name("Marudhu"))
 
 book = Book.find(1)
 puts 'Books available count is ' + book.available.to_s
 
 puts 'Status of TranscaTions'
-user.transcations.each do |loan|
-	puts loan.returned.to_s + ' '
+user.transcations.each do |trans|
+	puts trans.returned.to_s + ' '
 end
 
 puts 'Finding Books by Categories'
