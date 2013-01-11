@@ -1,0 +1,17 @@
+<h2> User </h2>
+
+<%=puts  @user.inspect %>
+Name: <%=  @user.name %> <br/>
+Reg no: <%= @user.regno %> <br/>
+Limit: <%= @user.limit %> <br/>
+Available: <%= @user.available %> <br/>
+Added on: <%= @user.created_at.strftime('%d-%m-%Y') %>
+
+<br/><br/> 
+
+			<%= link_to "edit" ,edit_user_path(@user) %>
+
+			<%= link_to "delete" , user_path(@user) ,{ :method => :delete ,:remote => true }  %> 
+
+<br/><br/>
+	<%= link_to 'Back to Users' ,users_path %> 

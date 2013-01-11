@@ -62,9 +62,9 @@ ActiveRecord::Schema.define(:version => 20130110072400) do
     t.integer  "book_id"
     t.datetime "start"
     t.datetime "end"
-    t.boolean  "returned"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.boolean  "returned",    :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.datetime "returneddoj"
   end
 
@@ -74,10 +74,10 @@ ActiveRecord::Schema.define(:version => 20130110072400) do
     t.string   "name"
     t.integer  "limit"
     t.string   "regno"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "available"
-    t.boolean  "admin"
+    t.boolean  "admin",      :default => false
     t.boolean  "enabled"
   end
 

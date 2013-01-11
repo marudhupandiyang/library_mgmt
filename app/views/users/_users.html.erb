@@ -1,0 +1,17 @@
+	<%= will_paginate(@users) %>
+
+	<br/><br/>
+
+	<% @users.each do |user| %>
+		<li > <%= link_to user.name , user_path(user)  %> 
+			<%= link_to "edit" ,edit_user_path(user) %>
+
+			<%= link_to "delete" , user_path(user) ,{ :method => :delete ,:remote => true }  %> </li>
+	<% end %>
+
+<br/><br/>
+
+
+
+	<%= will_paginate(@users) %>
+

@@ -1,8 +1,10 @@
 Library3::Application.routes.draw do
 
 
+
   root :to => 'admin#index'
   
+  resources :users  
   resources :transcations
   resources :authors
   resources :categories
