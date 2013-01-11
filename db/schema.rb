@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(:version => 20130111164713) do
   create_table "transcations", :force => true do |t|
     t.integer  "user_id"
     t.integer  "book_id"
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "startdte"
+    t.datetime "enddte"
     t.boolean  "returned",    :default => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false

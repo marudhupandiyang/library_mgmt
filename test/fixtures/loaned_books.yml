@@ -3,13 +3,13 @@
 one:
   user: 
   book_id: 1
-  start: 2013-01-08 15:50:51
-  end: 2013-01-08 15:50:51
+  startdte: 2013-01-08 15:50:51
+  enddte: 2013-01-08 15:50:51
   returned: false
 
 two:
   user: 
   book_id: 1
-  start: 2013-01-08 15:50:51
-  end: 2013-01-08 15:50:51
+  startdte: 2013-01-08 15:50:51
+  enddte: 2013-01-08 15:50:51
   returned: false

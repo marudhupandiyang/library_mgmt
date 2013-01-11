@@ -35,20 +35,20 @@ end
 
 #call dashboard with dates	
 def admin_dashboard_Details(dte)
-	@books_borrowed = Transcation.where('start >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\'' ).count.to_s
+	@books_borrowed = Transcation.where('startdte >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\'' ).count.to_s
 	@books_returned = Transcation.where('returned = true and returneddoj >= \'' + (dte - 7).strftime("%Y-%m-%d")  + '\'' ).count.to_s
-	@books_pending =  Transcation.where('returned = false and end  between  \'' + (dte - 7).strftime("%Y-%m-%d")  + '\' and \'' + dte.strftime("%Y-%m-%d") + '\'' ).count.to_s
+	@books_pending =  Transcation.where('returned = false and enddte  between  \'' + (dte - 7).strftime("%Y-%m-%d")  + '\' and \'' + dte.strftime("%Y-%m-%d") + '\'' ).count.to_s
 	
 	@new_books = Book.where('created_at >= \'' + (dte - 7).strftime("%Y-%m-%d")  + '\'' ).count.to_s
 	@new_users = Auth.where('created_at  >= \'' + (dte - 7).strftime("%Y-%m-%d")  + '\'' ).count.to_s
-	@active_users = Transcation.where('start >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\' and returneddoj >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\'').count.to_s
+	@active_users = Transcation.where('startdte >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\' and returneddoj >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\'').count.to_s
 end
 
 def user_dashboard_Details(dte)
-  @books_borrowed = current_auth.transcations.where('start >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\'' ).count.to_s
+  @books_borrowed = current_auth.transcations.where('startdte >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\'' ).count.to_s
 
   @books_returned = current_auth.transcations.where('returned = true and returneddoj >= \'' + (dte - 7).strftime("%Y-%m-%d")  + '\'' ).count.to_s
-  @books_pending =  current_auth.transcations.where('returned = false and end  between  \'' + (dte - 7).strftime("%Y-%m-%d")  + '\' and \'' + dte.strftime("%Y-%m-%d") + '\'' ).count.to_s
+  @books_pending =  current_auth.transcations.where('returned = false and enddte  between  \'' + (dte - 7).strftime("%Y-%m-%d")  + '\' and \'' + dte.strftime("%Y-%m-%d") + '\'' ).count.to_s
   
   @allbooks_pending =  current_auth.transcations.where('returned = false ' ).count.to_s
 

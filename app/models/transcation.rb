@@ -2,7 +2,7 @@ class Transcation < ActiveRecord::Base
   belongs_to :auth ,:foreign_key => 'user_id'
   belongs_to :book
 
-  attr_accessible :book_id, :end, :returned, :start ,:user_id , :returneddoj
+  attr_accessible :book_id, :enddte, :returned, :startdte ,:user_id , :returneddoj
 
   before_save :set_returned
 
@@ -34,8 +34,8 @@ class Transcation < ActiveRecord::Base
         return false
       end
  		#update that the user and decrement the appropiate counter
-    self.start =  DateTime.now
-    self.end = DateTime.now + 15.days
+    self.startdte =  DateTime.now
+    self.enddte = DateTime.now + 15.days
     self.auth = Auth.find_by_regno(regno)
     self.book = Book.find(book_id)
 
@@ -62,7 +62,7 @@ class Transcation < ActiveRecord::Base
     begin
     #update that the user and decrement the appropiate counter
     
-      self.end = DateTime.parse(self.end.to_s) + 15.days
+      self.enddte = DateTime.parse(self.end.to_s) + 15.days
       self.save
       return true
     
