@@ -26,6 +26,9 @@ def addbook
   end
 end
 
+def issuebook
+end
+
 
 #call dashboard with dates	
 def dashboardDetails(dte)
@@ -39,4 +42,5 @@ def dashboardDetails(dte)
 end
 
 end
+
 

@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   def index
-    @books = Book.all
+    @books = Book.paginate(:page => params[:page] , :per_page => 2)
   end
 
   def new
@@ -15,7 +15,7 @@ class BooksController < ApplicationController
     
     if @book.save
         flash.notice ='Created Sucessfully'
-        redirect_to books_path
+        render :show
     else
         flash.now[:notice] ='Creation Failed'
         render :new
@@ -38,21 +38,27 @@ class BooksController < ApplicationController
 
     if @book.update_attributes(params[:book])
         flash.notice ='Updated Sucessfully'
-        redirect_to books_path
+        render :show
     else
         flash.now[:notice] ='Update Failed'
-        render :show
+        render :edit
     end
 
   end
 
   def destroy
-    @book = Book.find(params[:id])
-    @book.destroy
+    book = Book.find(params[:id])
+   
 
-    flash.notice ='Deleted Sucessfully'
+  if book.destroy
+      flash.notice = 'Book Deleted Sucessfully'
+      @books = Book.paginate(:page => params[:page] , :per_page => 2)
+      render :index
+    else
+      flash.now[:notice] = 'Book Not Deleted'
+      render :show
+    end
 
-    redirect_to books_path
 
   end
 

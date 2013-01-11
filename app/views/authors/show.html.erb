@@ -7,4 +7,7 @@ Added on: <%= @author.created_at.strftime('%d-%m-%Y') %>
 
 			<%= link_to "edit" ,edit_author_path(@author) %>
 
-			<%= link_to "delete" ,author_path(@author) ,:method => :delete %> </li>
+			<%= link_to "delete" , author_path(@author) ,{ :method => :delete ,:remote => true }  %> 
+
+<br/><br/>
+	<%= link_to 'Back to Authors' ,authors_path %> 

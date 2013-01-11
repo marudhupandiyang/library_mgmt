@@ -13,5 +13,9 @@ Added on: <%= @book.created_at.strftime('%d-%m-%Y') %>
 
 <br/>
 
-		<%= link_to "edit" , edit_book_path(@book) %>
-		<%= link_to "delete" , book_path(@book), :method => :delete %>
+		<%= link_to "edit" , edit_book_path(@book)  %>
+		<%= link_to "delete" , book_path(@book), { :method => :delete , :remote => true }  %>
+
+
+<br/> <br/>
+<%= link_to 'Back to Books' ,books_path %>

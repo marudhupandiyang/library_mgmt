@@ -1,0 +1,18 @@
+
+
+<%= will_paginate(@categories) %> <br/><br/>
+
+<% @categories.each do |cat| %>
+
+	<li> <%= link_to cat.name, category_path(cat)  %>
+
+		<%= link_to 'edit' , edit_category_path(cat)  %>
+		<%= link_to 'delete' , category_path(cat) ,{ :method => :delete ,:remote => true } %>
+	</li>
+<% end %>
+
+
+
+<br/><br/>
+<%= will_paginate(@categories) %>
+

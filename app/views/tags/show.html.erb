@@ -3,4 +3,7 @@
 Name: <%= @tag.name %>
 
 		<%= link_to "edit" , edit_tag_path(@tag) %>
-		<%= link_to "delete" , tag_path(@tag), :method => :delete %>
+		<%= link_to "delete" , tag_path(@tag), { :method => :delete , :remote => true} %>
+<br/><br/>
+
+<%= link_to 'Back to Tags' ,tags_path %>

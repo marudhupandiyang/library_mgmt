@@ -4,6 +4,8 @@
   <title>Library3</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <% javascript_include_tag 'pagination'%>
+  
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -16,7 +18,9 @@
 	<br/>
 
 
-<%= yield %>
+<div id="body_content">
+	<%= yield %>
+</div>
 
 </body>
 

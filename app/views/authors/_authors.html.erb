@@ -1,0 +1,17 @@
+	<%= will_paginate(@authors) %>
+
+	<br/><br/>
+
+	<% @authors.each do |author| %>
+		<li > <%= link_to author.name , author_path(author)  %> 
+			<%= link_to "edit" ,edit_author_path(author) %>
+
+			<%= link_to "delete" , author_path(author) ,{ :method => :delete ,:remote => true }  %> </li>
+	<% end %>
+
+<br/><br/>
+
+
+
+	<%= will_paginate(@authors) %>
+

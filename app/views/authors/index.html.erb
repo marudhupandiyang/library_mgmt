@@ -3,9 +3,6 @@
 
 	<%= link_to 'Add Author' , new_author_path %>
 
-	<% getAuthors.each do |author| %>
-		<li > <%= link_to author.name , author_path(author)  %> 
-			<%= link_to "edit" ,edit_author_path(author) %>
-
-			<%= link_to "delete" ,author_path(author) ,:method => :delete %> </li>
-	<% end %>
+<div id="authors">
+		<%= render 'authors' %>
+</div>

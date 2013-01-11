@@ -2,7 +2,7 @@ class TagsController < ApplicationController
 
 
   def index
-  	@tags = Tag.all
+  	@tags = Tag.paginate(:page => params[:page] , :per_page => 1)
   end
 
   def create
@@ -10,20 +10,28 @@ class TagsController < ApplicationController
 
   	if @tag.save
   		flash.notice = "Created Sucessfully"
-  		redirect_to tags_path
+  		render :show
   	else
   		flash.now[:notice] = "Creation Failed"
-  		render :show
+  		render :edit
   	end
 
   end
 
   def destroy
-  	@tag = Tag.find(params[:id])
-  	@tag.destroy
-  	flash.notice = 'Deleted Sucessfully'
-  	redirect_to tags_path
+  	tag = Tag.find(params[:id])
+  	
+  	
+    if tag.destroy
+      flash.notice = 'Tag Deleted Sucessfully'
+      @tags = Tag.paginate(:page => params[:page] , :per_page => 1)
+      render :index
+    else
+      flash.now[:notice] = 'Tag Not Deleted'
+      render :show
+    end
   end
+  
 
   def new
   	@tag = Tag.new
@@ -40,10 +48,10 @@ class TagsController < ApplicationController
 
   	if @tag.update_attributes(params[:tag])
   		flash.notice = "Updated Sucessfully"
-  		redirect_to tags_path
+  		render :show
   	else
   		flash.now[:notice] = "Update Failed"
-  		render :show
+  		render :edit
   	end
 
   end

@@ -4,12 +4,11 @@
 
 <h2> Existing Categories </h2>
 
-<% @categories.each do |cat| %>
+<div id="categories">
+	
+	<%= render 'categories'%>
 
-	<li> <%= link_to cat.name, category_path(cat)  %>
+</div>
 
-		<%= link_to 'edit' , edit_category_path(cat) %>
-		<%= link_to 'delete' , category_path(cat) , :method => :delete %>
-	</li>
-<% end %>
+
 

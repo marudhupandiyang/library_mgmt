@@ -4,7 +4,7 @@
 <% end %>
 
 
-<%= form_for @book do |f| %>
+<%= form_for @book, :remote => true  do |f| %>
 
 	<%= f.label :title %>
 	<%= f.text_field :title %> <br/><br/>
@@ -59,4 +59,4 @@
 
 <% end %>
 
-<%= link_to 'Back' ,books_path %>
+<%= link_to 'Back to Books' ,books_path %>

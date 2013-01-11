@@ -1,13 +1,15 @@
 class AuthorsController < ApplicationController
 
 	def destroy
-
-		if Author.destroy(params[:id])
+		author = Author.find(params[:id])
+		
+		if author.destroy
 			flash.notice = 'Author Deleted Sucessfully'
-			redirect_to  root_path
+			@authors = Author.paginate(:page => params[:page] , :per_page => 1)
+			render :index
 		else
 			flash.now[:notice] = 'Author Not Deleted'
-			render :new_Author
+			render :show
 		end
 
 	end
@@ -22,16 +24,16 @@ class AuthorsController < ApplicationController
 
 		if @author.save
 			flash.notice = 'Author Added Sucessfully'
-			redirect_to  root_path
+			render :show
 		else
 			
 			flash.now[:notice] = 'Author Not Added'
-			render :new_Author
+			render :new
 		end
 	end
 
 	def index
-
+		@authors = Author.paginate(:page => params[:page] , :per_page => 1)
 	end
 
 	def edit
@@ -48,10 +50,11 @@ class AuthorsController < ApplicationController
 
 	    if @author.update_attributes(params[:author])
 	      flash.notice = 'Updated Sucessfully' 
-	      redirect_to authors_path
+	      render :show
+
 	    else
 	      flash.now[:notice] = 'Cannot update. Try again'
-	      render :show
+	      render :edit
 	    end
 	end
 

@@ -2,9 +2,17 @@ class CategoriesController < ApplicationController
 
 
   def destroy
+    category = Category.find(params[:id])
 
-    Category.destroy(params[:id])
-    redirect_to categories_path
+    if category.destroy
+      flash.notice = 'Category Deleted Sucessfully'
+      @categories = Category.paginate(:page => params[:page] , :per_page => 1)
+      render :index
+    else
+      flash.now[:notice] = 'Category Not Deleted'
+      render :show
+    end
+
   	
   end
 
@@ -17,16 +25,16 @@ class CategoriesController < ApplicationController
   
     if @category.save
       flash.notice = 'Created Category Sucessfully'
-      redirect_to categories_path
+      render :show
     else
       flash.now[:notice] = 'Creating Category Failed'
-      render :show
+      render :edit
     end
   end
 
 
   def index
-  	@categories = Category.all
+  	@categories = Category.paginate(:page => params[:page] , :per_page => 1)
   end
 
   def show
@@ -42,10 +50,26 @@ class CategoriesController < ApplicationController
 
     if @category.update_attributes(params[:category])
       flash.notice = 'Updated Sucessfully' 
-      redirect_to categories_path
+      render :show
+
     else
       flash.now[:notice] = 'Cannot update. Try again'
-      render :show
+      render :edit
     end
   end
 end
+
+
+# <% if params[:page].present? %>
+
+
+#   $("#categories").html("<%= escape_javascript(render('categories')) %>")
+
+
+# <% else %>
+
+#   render :partial => 'index.html.erb' , :layout => false
+# <% end %>
+
+
+

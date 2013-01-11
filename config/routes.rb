@@ -1,5 +1,17 @@
 Library3::Application.routes.draw do
 
+  get "transcation/index"
+
+  get "transcation/create"
+
+  get "transcation/show"
+
+  get "transcation/edit"
+
+  get "transcation/update"
+
+  get "transcation/destroy"
+
   root :to => 'admin#index'
 
   resources :authors
@@ -9,6 +21,7 @@ Library3::Application.routes.draw do
 
   match '/search' => 'books#search' , :as => :search , :via => [:get , :post]
   match '/addbook/:id' => 'admin#addbook' , :as => :addbook , :via => [:get , :post]
+  match '/issue' => 'admin#issuebook' , :as => :issue  ,:via => [:get]
 
   # get "tags/destroy"
 

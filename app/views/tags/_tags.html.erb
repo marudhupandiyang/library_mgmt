@@ -1,0 +1,18 @@
+
+
+<%= will_paginate(@tags) %> <br/><br/>
+
+<% @tags.each do |tag| %>
+	<li> <%= link_to tag.name , tag_path(tag)  %>
+		<%= link_to "edit" , edit_tag_path(tag)  %>
+		<%= link_to "delete" , tag_path(tag), { :method => :delete ,:remote => true} %>
+	</li>
+<% end %>
+
+<br/><br/>
+<%= will_paginate(@tags) %> 
+
+<br/><br/>
+
+
+<%= link_to 'Back to Tags' ,tags_path  %>
