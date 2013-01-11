@@ -1,2 +1,26 @@
-<h1>Transcation#show</h1>
-<p>Find me in app/views/transcation/show.html.erb</p>
+<h2> Transcations </h2>
+
+<% unless @transcation.errors.empty? %>
+	<div id="error"> <%= @transcation.errors.full_messages %> </div> <br/>
+<% end %>
+
+
+Book: <%= @transcation.book.title %> <br/>
+Book id: <%= @transcation.book.id %> <br/>
+User Name: <%= @transcation.user.name %> <br/>
+User Regno: <%= @transcation.user.regno %><br/>
+
+
+
+	Issued on: <%= @transcation.start.strftime("%d-%m-%Y ")%> <br/>
+	Due Date: <%= @transcation.end.strftime("%d-%m-%Y ")%> <br/>
+
+		
+<%= link_to "delete" , transcation_path(@transcation), { :method => :delete , :remote => true} %>
+
+		<%= link_to "Re Issue" , transcation_path(@transcation) , {:method => :put ,:remote => true }  %>
+
+
+<br/><br/>
+
+<%= link_to 'Back to transcation' ,transcations_path %>

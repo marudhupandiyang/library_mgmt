@@ -4,11 +4,7 @@ class ApplicationController < ActionController::Base
   layout :getlayout
 
   def getlayout
-  	puts "\n\nTest "
-  	puts request.inspect
-
-  	puts "\n\nTest "
-
+ 
   	if request.xhr?
   		false
   	else

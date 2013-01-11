@@ -1,0 +1,23 @@
+<% unless @transcation.errors.empty? %>
+	<div id="error"> <%= @transcation.errors.full_messages %> </div> <br/>
+<% end %>
+
+
+
+<%= form_for (@transcation) , :remote => true  do |f| %>
+
+	<%= f.label :book_id %>
+	<%= f.text_field :book_id %>
+
+	<br/><br/>
+
+	<%= f.label :user_id %>
+	<%= f.text_field :user_id %>
+
+	<br/>
+	<%= f.submit %>
+
+
+<%= link_to "Back to transcation" , transcations_path %>
+
+<% end %>

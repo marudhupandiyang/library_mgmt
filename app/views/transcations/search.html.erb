@@ -1,0 +1,21 @@
+<h2> Search Transcation  </h2>
+
+
+<%= form_for :reissuesearch_path , { :remote => true ,:method => :post } do  %>
+
+	<%= label_tag "Book Id" %>
+	<%= text_field_tag "book_id"  %>
+
+	<br/><br/>
+
+	<%= label_tag "User id" %>
+	<%= text_field_tag "user_id"  %>
+
+	<br/>
+	<%= submit_tag "Search" %>
+
+
+<br/><br/>
+<% end %>
+<%= link_to "Back to transcation" , transcations_path %>
+

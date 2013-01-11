@@ -5,7 +5,7 @@ class CreateTranscations < ActiveRecord::Migration
       t.integer :book_id
       t.datetime :start
       t.datetime :end
-      t.boolean :returned
+      t.boolean :returned, :default => false
 
       t.timestamps
     end

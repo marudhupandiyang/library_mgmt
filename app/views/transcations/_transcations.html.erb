@@ -1,0 +1,23 @@
+<%= will_paginate(@transcations) %>
+
+<% @transcations.each do |tran| %>
+ <br/>
+
+Book: <%= tran.book.title %> <br/>
+Book id: <%= tran.book.id %> <br/>
+User Name: <%= tran.user.name %> <br/>
+User Regno: <%= tran.user.regno %> <br/>
+
+	Issued on: <%= tran.start.strftime("%d-%m-%Y ")%> <br/>
+	Due Date: <%= tran.end.strftime("%d-%m-%Y ")%> <br/>
+
+	<%= link_to "delete" , transcation_path(tran), { :method => :delete , :remote => true} %>
+
+	<%= link_to "Re Issue" , transcation_path(tran) , {:method => :put ,:remote => true }  %>
+
+<hr/>
+<% end %>
+
+
+
+<%= will_paginate(@transcations) %>
