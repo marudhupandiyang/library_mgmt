@@ -11,14 +11,17 @@
 <body>
 
 	<%= render 'layouts/header'%>
-	<br/><br/><br/>
+
+<div id="body_content">
+
+		<br/><br/><br/>
 	<% unless flash.notice.nil? %>
 		<div id="notice"> <%= flash.notice %> </div> <br/>
 	<% end %>
 	<br/>
 
 
-<div id="body_content">
+
 	<%= yield %>
 </div>
 

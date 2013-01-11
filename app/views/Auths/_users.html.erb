@@ -12,7 +12,7 @@
 		<li > <%= link_to user.name , auth_path(user)  %> 
 
 		<%  if current_auth != user %>
-			<%= link_to "Delete", registration_path(user), :method => :delete %>
+			<%= #link_to "Delete", registration_path(user), :method => :delete %>
 		<% end %>
 
  </li>

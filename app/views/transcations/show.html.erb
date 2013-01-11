@@ -11,28 +11,28 @@ User Name: <%= @transcation.auth.name %> <br/>
 User Regno: <%= @transcation.auth.regno %><br/>
 
 
-Returned: <%= tran.returned %> <br/>
+Returned: <%= @transcation.returned %> <br/>
 
-<% if tran.returned %>
-	Returned Date: <%= tran.returneddoj %> <br/>
+<% if @transcation.returned %>
+	Returned Date: <%= @transcation.returneddoj %> <br/>
 <%end %>
 
 
 
-	Issued on: <%= @transcation.start.strftime("%d-%m-%Y ")%> <br/>
-	Due Date: <%= @transcation.end.strftime("%d-%m-%Y ")%> <br/>
+	Issued on: <%= @transcation.startdte.strftime("%d-%m-%Y ")%> <br/>
+	Due Date: <%= @transcation.enddte.strftime("%d-%m-%Y ")%> <br/>
 
 <% if current_auth.admin == true %>
 		
 <%= link_to "delete" , transcation_path(@transcation), { :method => :delete , :remote => true} %>
 
 
-	<% unless tran.returned %>
+	<% unless @transcation.returned %>
 
 
-		<%= link_to "Return" , returnbook_path(tran) , {:method => :post ,:remote => true }  %>
+		<%= link_to "Return" , returnbook_path(@transcation) , {:method => :post ,:remote => true }  %>
 
-		<%= link_to "Re Issue" , transcation_path(tran) , {:method => :put ,:remote => true }  %>
+		<%= link_to "Re Issue" , transcation_path(@transcation) , {:method => :put ,:remote => true }  %>
 
 	<%end %>
 		

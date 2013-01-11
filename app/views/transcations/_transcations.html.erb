@@ -14,8 +14,8 @@ Returned: <%= tran.returned %> <br/>
 Returned Date: <%= tran.returneddoj %> <br/>
 <%end %>
 
-	Issued on: <%= tran.start.strftime("%d-%m-%Y ")%> <br/>
-	Due Date: <%= tran.end.strftime("%d-%m-%Y ")%> <br/>
+	Issued on: <%= tran.startdte.strftime("%d-%m-%Y ")%> <br/>
+	Due Date: <%= tran.enddte.strftime("%d-%m-%Y ")%> <br/>
 
 <% if current_auth.admin == true %>
 	<%= link_to "delete" , transcation_path(tran), { :method => :delete , :remote => true} %>
