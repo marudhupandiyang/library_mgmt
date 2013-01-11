@@ -6,21 +6,23 @@ class Transcation < ActiveRecord::Base
 
   before_save :set_returned
 
-  def set_returned
+   def set_returned
 
     if self.new_record?
       self.returned = false
+
     end
-
-  end
-
+    true
+   end
 
    #loan the book to the user
-  def issue(book_id,user_id)
+  def issue(book_id,regno)
 
 
+    student = User.find_by_regno(regno)
     begin
-      recheck = Transcation.where('book_id = ' + book_id.to_s + ' and user_id = ' + user_id.to_s + ' and returned =  false' )
+      
+      recheck = Transcation.where('book_id = ' + book_id.to_s + ' and user_id = ' + student.id.to_s + ' and returned =  false' )
 
       unless recheck.empty?
         puts '  asdfsd'
@@ -34,10 +36,11 @@ class Transcation < ActiveRecord::Base
  		#update that the user and decrement the appropiate counter
     self.start =  DateTime.now
     self.end = DateTime.now + 15.days
-    self.user = User.find(user_id)
+    self.user = User.find_by_regno(regno)
     self.book = Book.find(book_id)
+
     self.save
-    puts '  asdfsd1'
+    puts '  asdfsd1 ' + errors.full_messages.to_s + " -- " + self.new_record?.to_s + "--" + self.inspect.to_s
     return true
 
     rescue => ex

@@ -12,8 +12,9 @@ class TranscationsController < ApplicationController
     @transcation = Transcation.new
    
    
-    if @transcation.issue(params[:transcation][:book_id],params[:transcation][:user_id])
+    if @transcation.issue(params[:transcation][:book_id],params[:regno])
       
+      @transcation.save
 
       flash.now[:notice] = "Issued Book"
       render :show
@@ -56,8 +57,17 @@ class TranscationsController < ApplicationController
 
   def search
     if params[:book_id].present? 
-        @transcations = Transcation.where("user_id = " + params[:user_id] + ' and book_id = ' + params[:user_id]).paginate(:page => params[:page] , :per_page => 100)
+      begin
+        
+        @transcations = Transcation.where("user_id = " + User.find_by_regno(params[:regno]).id.to_s + ' and book_id = ' + params[:book_id]).paginate(:page => params[:page] , :per_page => 100)
         render :index
+
+      rescue => ex
+        flash.now[:notice] = ex.message
+        puts ex.message
+
+      end
+
     end
 
   end
