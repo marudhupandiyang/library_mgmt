@@ -9,7 +9,7 @@
 
 Auth.create([{:email => 'marudhu@devbrother.com' ,:password => 'admin0123', :password_confirmation => 'admin0123' , :name => "Admin" , :limit => 1, :regno => '000000' ,:admin => true}])
 
-Auth.create([{:email => 'marudhu@gmail.com' ,:password => 'test0123', :password_confirmation => 'test0123' , :name => "Marudhu" , :limit => 4, :available => 4, :regno => '123456' ,:admin => true}])
+Auth.create([{:email => 'marudhu@gmail.com' ,:password => 'test0123', :password_confirmation => 'test0123' , :name => "Marudhu" , :limit => 4, :available => 4, :regno => '123456' ,:admin => false}])
 
 
 

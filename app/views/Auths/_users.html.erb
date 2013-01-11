@@ -1,8 +1,8 @@
 	
 
-	<% if @users.nil?
-	 @users = Auth.paginate(:page => params[:page] , :per_page => 1) %>
-	<% end %>
+	<% unless @users.present?
+	  @users = Auth.paginate(:page => params[:page] , :per_page => 1)
+	 end %>
 
 	<%= will_paginate(@users) %>
 

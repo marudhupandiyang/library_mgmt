@@ -4,16 +4,16 @@ $(function(){
 	$("a").live("click",function(){
 		
 		if (( $(this).html() == "delete"  ) || ( $(this).html() == "Re Issue") || ( $(this).html() == "Return") )  return true ;
-
-		$.get(this.href,null,function(data){ $("#body_content").html(data)});
+		$("#loading").show();
+		$.get(this.href,null,function(data){ $("#loading").hide(); $("#body_content").html(data)});
 		return false;
 
 	});
 
 
 	$(".pagination a").live("click",function(){
-		$(".pagination").html("Page is loading");
-		$.get(this.href,null,null,"script");
+		$("#loading").show();
+		$.get(this.href,null,function(){$("#loading").hide();},"script");
 		return false;
 
 	});
