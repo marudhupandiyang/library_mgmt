@@ -66,6 +66,6 @@ Library3::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   #devise mailer
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   
+config.action_mailer.default_url_options = { :host => 'http://pacific-hollows-9330.herokuapp.com/' }  
 end
