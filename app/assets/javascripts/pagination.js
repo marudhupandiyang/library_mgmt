@@ -3,7 +3,7 @@ $(function(){
 
 	$("a").live("click",function(){
 		
-		if (( $(this).html() == "delete"  ) || ( $(this).html() == "Re Issue") )  return true ;
+		if (( $(this).html() == "delete"  ) || ( $(this).html() == "Re Issue") || ( $(this).html() == "Return") )  return true ;
 
 		$.get(this.href,null,function(data){ $("#body_content").html(data)});
 		return false;

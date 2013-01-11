@@ -7,19 +7,36 @@
 
 Book: <%= @transcation.book.title %> <br/>
 Book id: <%= @transcation.book.id %> <br/>
-User Name: <%= @transcation.user.name %> <br/>
-User Regno: <%= @transcation.user.regno %><br/>
+User Name: <%= @transcation.auth.name %> <br/>
+User Regno: <%= @transcation.auth.regno %><br/>
+
+
+Returned: <%= tran.returned %> <br/>
+
+<% if tran.returned %>
+	Returned Date: <%= tran.returneddoj %> <br/>
+<%end %>
 
 
 
 	Issued on: <%= @transcation.start.strftime("%d-%m-%Y ")%> <br/>
 	Due Date: <%= @transcation.end.strftime("%d-%m-%Y ")%> <br/>
 
+<% if current_auth.admin == true %>
 		
 <%= link_to "delete" , transcation_path(@transcation), { :method => :delete , :remote => true} %>
 
-		<%= link_to "Re Issue" , transcation_path(@transcation) , {:method => :put ,:remote => true }  %>
 
+	<% unless tran.returned %>
+
+
+		<%= link_to "Return" , returnbook_path(tran) , {:method => :post ,:remote => true }  %>
+
+		<%= link_to "Re Issue" , transcation_path(tran) , {:method => :put ,:remote => true }  %>
+
+	<%end %>
+		
+<% end %>
 
 <br/><br/>
 

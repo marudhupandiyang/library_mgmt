@@ -1,6 +1,9 @@
 <h2> Books </h2>
 
-<%= link_to 'Add book' , new_book_path %> <br/>
+
+<% if current_auth.admin == true %>
+	<%= link_to 'Add book' , new_book_path %> <br/>
+<% end %>
 
 
 <div id="books">

@@ -6,8 +6,10 @@
 
 	<li> <%= link_to cat.name, category_path(cat)  %>
 
+<% if current_auth.admin == true %>
 		<%= link_to 'edit' , edit_category_path(cat)  %>
 		<%= link_to 'delete' , category_path(cat) ,{ :method => :delete ,:remote => true } %>
+<% end %>
 	</li>
 <% end %>
 

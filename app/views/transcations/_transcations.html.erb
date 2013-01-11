@@ -5,15 +5,31 @@
 
 Book: <%= tran.book.title %> <br/>
 Book id: <%= tran.book.id %> <br/>
-User Name: <%= tran.user.name %> <br/>
-User Regno: <%= tran.user.regno %> <br/>
+User Name: <%= tran.auth.name %> <br/>
+User Regno: <%= tran.auth.regno %> <br/>
+
+Returned: <%= tran.returned %> <br/>
+
+<% if tran.returned %>
+Returned Date: <%= tran.returneddoj %> <br/>
+<%end %>
 
 	Issued on: <%= tran.start.strftime("%d-%m-%Y ")%> <br/>
 	Due Date: <%= tran.end.strftime("%d-%m-%Y ")%> <br/>
 
+<% if current_auth.admin == true %>
 	<%= link_to "delete" , transcation_path(tran), { :method => :delete , :remote => true} %>
 
+
+<% unless tran.returned %>
+
+
+	<%= link_to "Return" , returnbook_path(tran) , {:method => :post ,:remote => true }  %>
+
 	<%= link_to "Re Issue" , transcation_path(tran) , {:method => :put ,:remote => true }  %>
+
+<%end %>
+<% end %>
 
 <hr/>
 <% end %>

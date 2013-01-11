@@ -12,9 +12,10 @@ Added on: <%= @book.created_at.strftime('%d-%m-%Y') %>
 
 
 <br/>
-
+<% if current_auth.admin == true %>
 		<%= link_to "edit" , edit_book_path(@book)  %>
 		<%= link_to "delete" , book_path(@book), { :method => :delete , :remote => true }  %>
+<% end  %>
 
 
 <br/> <br/>

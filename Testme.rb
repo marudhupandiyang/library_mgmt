@@ -79,15 +79,16 @@ Book.all.inspect
 book = Book.find(1)
 puts 'Available count ' + book.available.to_s
 
-user = User.find(User.find_by_name("Marudhu"))
+user = User.find_by_regno("123456"))
 puts 'User Name: ' + user.name
-puts 'User currently has ' + user.loaned_books.count.to_s + ' Loaned Books'
+puts 'User currently has ' + user.transcations.count.to_s + ' Transcations'
 
-puts 'Loaning ' + book.title + ' book to ' + user.name 
+puts 'Issuing ' + book.title + ' book to ' + user.name 
 
-user.loan_book(book)
+trans = Transcations.new
+trans.issue(book.id,user.regno)
 
-puts 'User currently has ' + user.loaned_books.count.to_s + ' Loaned Books'
+puts 'User currently has ' + user.transcations.count.to_s + ' Transcations'
 
 book = Book.find(1)
 puts 'Books available count is ' + book.available.to_s
@@ -101,7 +102,7 @@ book = Book.find_by_title('Harry Potter')
 puts 'Current available count is : ' + book.available.to_s
 
 puts 'Student Returns a book'
-user = User.find(User.find_by_name("Marudhu"))
+user = Auth.find_by_regno('123456')
 
 user.return_book(book.id)
 
@@ -110,8 +111,8 @@ user = User.find(User.find_by_name("Marudhu"))
 book = Book.find(1)
 puts 'Books available count is ' + book.available.to_s
 
-puts 'Status of Loaned Books'
-user.loaned_books.each do |loan|
+puts 'Status of TranscaTions'
+user.transcations.each do |loan|
 	puts loan.returned.to_s + ' '
 end
 

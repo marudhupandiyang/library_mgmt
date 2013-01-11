@@ -26,7 +26,7 @@ gem 'jquery-rails'
 #pagination
 gem 'will_paginate'#, '~> 3.0.0'
 
-#gem 'device' , '>= 2.2.0'
+gem 'devise' 
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

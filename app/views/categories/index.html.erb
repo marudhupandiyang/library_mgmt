@@ -1,6 +1,7 @@
 
-
-<%= link_to 'Add Category' , new_category_path %>
+<% if current_auth.admin == true %>
+	<%= link_to 'Add Category' , new_category_path %>
+<% end %>
 
 <h2> Existing Categories </h2>
 

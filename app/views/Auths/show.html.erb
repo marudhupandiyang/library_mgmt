@@ -1,0 +1,15 @@
+<h2> User </h2>
+
+<%=puts  @user.inspect %>
+Id: <%=  @user.id %> <br/>
+Name: <%=  @user.name %> <br/>
+Reg no: <%= @user.regno %> <br/>
+Limit: <%= @user.limit %> <br/>
+Available: <%= @user.available %> <br/>
+Added on: <%= @user.created_at.strftime('%d-%m-%Y') %>
+
+<br/><br/> 
+
+<%= link_to "Delete", registration_path(@user), :data => { :confirm => "Are you sure?" }, :method => :delete %>
+<br/><br/>
+	<%= link_to 'Back to Users' ,auths_path %> 

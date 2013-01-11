@@ -2,6 +2,9 @@
 
 
 <br/><br/>	
+<h3> Last 7 Days : </h3> 
+
+<% if  current_auth.admin == true %>
 	<%=  'Book Borrowed:' + @books_borrowed %> <br/>
 
 		<%=  'Book Returned:' + 	@books_returned %> <br/>
@@ -14,12 +17,7 @@
 
 		<%=  'Active Users:' + 	@active_users %> <br/>
 
-<br/><br/>	
-
-
-<%= link_to "Users" , users_path %>
-<%= link_to "Add User" , new_user_path %>
-
+<%= link_to "Users" , auths_path %>
 
 <br/><br/>	
 
@@ -34,6 +32,28 @@
 <%= link_to "Add Tag" , new_tag_path %>
 
 <br/><br/>
+
+
+<% else %>
+	<%=  'Book Borrowed:' + @books_borrowed %> <br/>
+
+
+		Book Returned: <%=  @books_returned %> <br/>
+
+		Book Pending: <%= @books_pending %> <br/>
+
+		New Books: <%=  @new_books %> <br/>
+
+<hr/>
+		Total Pending <%= @allbooks_pending%>
+
+<br/><br/>
+
+	<%= link_to " My Transcations" , transcations_path %>
+<% end %>
+
+<br/><br/>	
+
 
 <%= link_to "See all Books" , books_path %> 
 <%= link_to "See all Authors" , authors_path %> 

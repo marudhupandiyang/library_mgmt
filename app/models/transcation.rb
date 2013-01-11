@@ -1,5 +1,5 @@
 class Transcation < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :auth ,:foreign_key => 'user_id'
   belongs_to :book
 
   attr_accessible :book_id, :end, :returned, :start ,:user_id , :returneddoj
@@ -19,7 +19,7 @@ class Transcation < ActiveRecord::Base
   def issue(book_id,regno)
 
 
-    student = User.find_by_regno(regno)
+    student = Auth.find_by_regno(regno)
     begin
       
       recheck = Transcation.where('book_id = ' + book_id.to_s + ' and user_id = ' + student.id.to_s + ' and returned =  false' )
@@ -36,10 +36,14 @@ class Transcation < ActiveRecord::Base
  		#update that the user and decrement the appropiate counter
     self.start =  DateTime.now
     self.end = DateTime.now + 15.days
-    self.user = User.find_by_regno(regno)
+    self.auth = Auth.find_by_regno(regno)
     self.book = Book.find(book_id)
 
+    self.book.available -=1 
+    self.available -=1
+    self.book.save
     self.save
+
     puts '  asdfsd1 ' + errors.full_messages.to_s + " -- " + self.new_record?.to_s + "--" + self.inspect.to_s
     return true
 
@@ -71,27 +75,22 @@ class Transcation < ActiveRecord::Base
   #find the loan id and return the books 
   #increase the appropriate counters
 
-  def return_book(book_id)
+  def return_book
 
-  	#find the loaned book
-  	loan = self.transcations.where('book_id = ' + book_id + ' and returned = false')
+  	self.book.available += 1
+    self.auth.available +=1
   	
-  
-    book = Book.find(book_id)#increase the appropriate counters
-  	book.available += 1
-  	self.available += 1
-
   	#set the book was returned
-	  loan.returned = true
-	  loan.returneddoj = DateTime.now
+	  self.returned = true
+	  self.returneddoj = DateTime.now
 
 
 	#save the models
-	  loan.save
-    book.save
+	  self.book.save
+    self.auth.save
    	self.save
 
-
+    true
   end
 
 

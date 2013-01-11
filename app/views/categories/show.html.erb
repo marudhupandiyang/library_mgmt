@@ -5,8 +5,10 @@ Name: <%= @category.name %> <br/>
 
 <br/>
 
+<% if current_auth.admin == true %>
 		<%= link_to 'edit' , edit_category_path(@category) %>
 		<%= link_to 'delete' , category_path(@category) , { :method => :delete ,:remote => true } %>
+<% end %>
 
 <br/><br/>
 <%= link_to 'Back to Categories' , categories_path  %>

@@ -8,10 +8,15 @@
 		Available :<%= book.available  %> <br/>
 		Quantity :<%= book.quantity  %> <br/>
 
+<% if current_auth.admin == true %>
+
 		<%= link_to 'Add Quantity' , "javascript:addbook(" + book.id.to_s + ")" %>
 
 		<%= link_to "edit" , edit_book_path(book) %>
 		<%= link_to "delete" , book_path(book), { :method => :delete   ,:remote => true} %>
+
+<% end %>
+
 	</li>
 
 	<hr/>

@@ -1,7 +1,9 @@
 
 	<h2> Existing Authors </h2>
 
+<% if current_auth.admin == true %>
 	<%= link_to 'Add Author' , new_author_path %>
+<% end %>
 
 <div id="authors">
 		<%= render 'authors' %>

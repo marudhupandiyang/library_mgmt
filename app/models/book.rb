@@ -7,8 +7,7 @@ class Book < ActiveRecord::Base
 
   has_many :transcations #,:source => 'LoanedBook'
 
-  has_many :users ,:through => :transcations
-
+  has_many :auths ,:through => :transcations ,:foreign_key => 'user_id'
   #attributes
   attr_accessible :page, :title, :available, :price ,:quantity ,:category_ids, :tag_ids , :author_ids
 

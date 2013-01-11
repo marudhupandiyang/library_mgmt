@@ -1,7 +1,11 @@
 class TranscationsController < ApplicationController
 
   def index
-    @transcations = Transcation.paginate(:page => params[:page] , :per_page => 1)
+    if current_auth.admin == true
+      @transcations = Transcation.paginate(:page => params[:page] , :per_page => 1)
+    else
+      @transcations = current_auth.transcations.paginate(:page => params[:page] , :per_page => 1)
+    end
   end
 
   def new
@@ -10,8 +14,7 @@ class TranscationsController < ApplicationController
   
   def create
     @transcation = Transcation.new
-   
-   
+      
     if @transcation.issue(params[:transcation][:book_id],params[:regno])
       
       @transcation.save
@@ -50,8 +53,19 @@ class TranscationsController < ApplicationController
       render :index
     else
       flash.now[:notice] = 'Transcation Not Deleted'
+      @transcation = transcation
       render :show
     end
+
+  end
+
+  def returnbook
+    @transcation = Transcation.find(params[:id])
+
+    @transcation.return_book 
+
+    render :show
+    
 
   end
 
@@ -59,7 +73,7 @@ class TranscationsController < ApplicationController
     if params[:book_id].present? 
       begin
         
-        @transcations = Transcation.where("user_id = " + User.find_by_regno(params[:regno]).id.to_s + ' and book_id = ' + params[:book_id]).paginate(:page => params[:page] , :per_page => 100)
+        @transcations = Transcation.where("user_id = " + Auth.find_by_regno(params[:regno]).id.to_s + ' and book_id = ' + params[:book_id]).paginate(:page => params[:page] , :per_page => 100)
         render :index
 
       rescue => ex

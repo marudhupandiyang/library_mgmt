@@ -2,8 +2,10 @@
 
 Name: <%= @tag.name %>
 
+<% if current_auth.admin == true %>
 		<%= link_to "edit" , edit_tag_path(@tag) %>
 		<%= link_to "delete" , tag_path(@tag), { :method => :delete , :remote => true} %>
+<% end %>
 <br/><br/>
 
 <%= link_to 'Back to Tags' ,tags_path %>

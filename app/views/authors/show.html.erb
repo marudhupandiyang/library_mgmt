@@ -5,9 +5,13 @@ Added on: <%= @author.created_at.strftime('%d-%m-%Y') %>
 
 <br/><br/> 
 
+<% if current_auth.admin == true %>
+
 			<%= link_to "edit" ,edit_author_path(@author) %>
 
 			<%= link_to "delete" , author_path(@author) ,{ :method => :delete ,:remote => true }  %> 
+
+<% end %>
 
 <br/><br/>
 	<%= link_to 'Back to Authors' ,authors_path %> 

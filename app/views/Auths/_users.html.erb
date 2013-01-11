@@ -1,0 +1,26 @@
+	
+
+	<% if @users.nil?
+	 @users = Auth.paginate(:page => params[:page] , :per_page => 1) %>
+	<% end %>
+
+	<%= will_paginate(@users) %>
+
+	<br/><br/>
+
+	<% @users.each do |user| %>
+		<li > <%= link_to user.name , auth_path(user)  %> 
+
+		<%  if current_auth != user %>
+			<%= link_to "Delete", registration_path(user), :method => :delete %>
+		<% end %>
+
+ </li>
+	<% end %>
+
+<br/><br/>
+
+
+
+	<%= will_paginate(@users) %>
+

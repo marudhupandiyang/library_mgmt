@@ -2,7 +2,9 @@
 
 <h2> Tags </h2>
 
-<%= link_to 'Add Tag' , new_tag_path %> <br/>
+<% if current_auth.admin == true %>
+	<%= link_to 'Add Tag' , new_tag_path %> <br/>
+<% end %>
 
 <div id="tags">
 		<%= render 'tags' %>

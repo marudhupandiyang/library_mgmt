@@ -1,9 +1,11 @@
 
 <h1> Transcations </h1>
 
-<%= link_to 'Issue Book' , new_transcation_path%> 
+<% if current_auth.admin == true %>
+	<%= link_to 'Issue Book' , new_transcation_path%> 
 
-<%= link_to "ReIssue" , reissuesearch_path %>
+	<%= link_to "ReIssue" , reissuesearch_path %>
+<% end %>
 
 <br/>
 
