@@ -5,9 +5,9 @@ class Book < ActiveRecord::Base
 	has_and_belongs_to_many :categories
 	has_and_belongs_to_many :tags
 
-  has_many :loaned_books ,:source => 'LoanedBook'
+  has_many :transcations #,:source => 'LoanedBook'
 
-  has_many :users ,:through => :loaned_books
+  has_many :users ,:through => :transcations
 
   #attributes
   attr_accessible :page, :title, :available, :price ,:quantity ,:category_ids, :tag_ids , :author_ids

@@ -51,7 +51,13 @@ ActiveRecord::Schema.define(:version => 20130110072400) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "loaned_books", :force => true do |t|
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "transcations", :force => true do |t|
     t.integer  "user_id"
     t.integer  "book_id"
     t.datetime "start"
@@ -62,13 +68,7 @@ ActiveRecord::Schema.define(:version => 20130110072400) do
     t.datetime "returneddoj"
   end
 
-  add_index "loaned_books", ["user_id"], :name => "index_loaned_books_on_user_id"
-
-  create_table "tags", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+  add_index "transcations", ["user_id"], :name => "index_transcations_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

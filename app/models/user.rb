@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
-  has_many :loaned_books ,:source => 'LoanedBook'
-  has_many :books, :through =>  :loaned_books 
+  has_many :transcations #,:source => 'LoanedBook'
+  has_many :books, :through =>  :transcations
 
   attr_accessible :limit, :name, :regno, :available, :admin, :enabled ,:returned
 
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     loan.save
 
 =begin
-	    loan = self.loaned_books.new :start => DateTime.now , :end => DateTime.now + 15.days
+	    loan = self.transcations.new :start => DateTime.now , :end => DateTime.now + 15.days
       loan.book = book
 	    loan.book.available -= 1
     	self.available -=1
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   def return_book(book_id)
 
   	#find the loaned book
-  	loan = self.loaned_books.where('book_id = ' + book_id + ' and returned = false')
+  	loan = self.transcations.where('book_id = ' + book_id + ' and returned = false')
   	
   
     book = Book.find(book_id)#increase the appropriate counters
