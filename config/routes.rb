@@ -5,7 +5,10 @@ Library3::Application.routes.draw do
   resources :authors
   resources :categories
   resources :tags
+  resources :books
 
+  match '/search' => 'books#search' , :as => :search , :via => [:get , :post]
+  match '/addbook/:id' => 'admin#addbook' , :as => :addbook , :via => [:get , :post]
 
   # get "tags/destroy"
 

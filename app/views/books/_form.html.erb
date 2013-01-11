@@ -1,0 +1,62 @@
+
+<% unless @book.errors.empty? %>
+	<div id="error"> <%= @book.errors.full_messages %> </div> <br/>
+<% end %>
+
+
+<%= form_for @book do |f| %>
+
+	<%= f.label :title %>
+	<%= f.text_field :title %> <br/><br/>
+
+	<%= f.label :page , "Page Count" %>
+	<%= f.text_field :page %> <br/><br/>
+
+	<%= f.label :price  %>
+	<%= f.text_field :price %> <br/><br/>
+
+	<% if @book.quantity.nil?  %>
+		<%= f.label :quantity , "Book Count" %>
+		<%= f.text_field :quantity %> <br/><br/>
+	<% end %>
+
+	Tag: <br/>
+	<% Tag.all.each  do |tag| %>
+
+		<%= check_box_tag 'book[tag_ids][]' ,tag.id , @book.tags.include?(tag) %>
+
+		<%= label_tag tag.name %>
+
+	<% end %>
+
+	<br/><br/>
+
+	Categories: <br/>
+	<% Category.all.each  do |cat| %>
+
+		<%= check_box_tag 'book[category_ids][]' , cat.id , @book.categories.include?(cat) %>
+
+		<%= label_tag cat.name %>
+		
+	<% end %>
+
+	<br/><br/>
+
+
+	Authors: <br/>
+	<% Author.all.each  do |author| %>
+
+		<%= check_box_tag 'book[author_ids][]' , author.id , @book.authors.include?(author) %>
+
+		<%= label_tag author.name %>
+		
+	<% end %>
+
+	<br/><br/>
+
+	
+	<%= f.submit  %>
+
+<% end %>
+
+<%= link_to 'Back' ,books_path %>

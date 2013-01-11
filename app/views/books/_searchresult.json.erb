@@ -1,0 +1,22 @@
+
+<% json = [] %>
+<%   @result.each do |res| %>
+	
+	<% authors = [] %> 
+
+	<% res.authors.each do |auth|%>
+		<% authors.push(auth.name) %>
+	<% end %>
+
+ 	<%  json.push({
+		'title' => res.title,
+		'price' => res.price,
+		 'authors' => authors.join(", ")
+
+
+	}) %>
+
+
+<% end %>
+
+<%= json.to_json.html_safe %>

@@ -1,21 +1,6 @@
 <br/><br/>	
 
 
-
-<h1>Search Books</h1>
-
-
-	<%= form_tag  ''  do %>
-
-		<%= label_tag 'Search: ' %>
-
-		<%= text_field_tag :book_name %>
-
-		<%= submit_tag 'Submit' %>
-
-
-	<% end %>
-
 <br/><br/>	
 	<%=  'Book Borrowed:' + @books_borrowed %> <br/>
 
@@ -32,13 +17,14 @@
 <br/><br/>	
 
 
-
+<%= link_to "Add Book" , new_book_path %>
 <%= link_to "Add Author" , new_author_path %> 
 <%= link_to "Add Category" , new_category_path %>
 <%= link_to "Add Tag" , new_tag_path %>
 
 <br/><br/>
 
+<%= link_to "See all Books" , books_path %> 
 <%= link_to "See all Authors" , authors_path %> 
 <%= link_to "See all Categories" , categories_path %>
 <%= link_to "See all Tags" , tags_path %>

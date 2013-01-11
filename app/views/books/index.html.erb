@@ -1,0 +1,21 @@
+<h2> Books </h2>
+
+<%= link_to 'Add book' , new_book_path %> <br/>
+
+<% @books.each do |book| %>
+	<li> Id: <%= link_to book.id  , book_path(book) %> <br/>
+		Title: <%= book.title  %> <br/>
+		Price :<%= book.price  %> <br/>
+		Page count :<%= book.page  %> <br/>
+		Available :<%= book.available  %> <br/>
+		Quantity :<%= book.quantity  %> <br/>
+
+		<%= link_to 'Add Quantity' , "javascript:addbook(" + book.id.to_s + ")" %>
+
+		<%= link_to "edit" , edit_book_path(book) %>
+		<%= link_to "delete" , book_path(book), :method => :delete %>
+	</li>
+
+	<hr/>
+
+<% end %>

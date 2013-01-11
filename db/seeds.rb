@@ -12,7 +12,7 @@ user = User.create([{:name => "admin" , :limit => 1, :regno => '123456' ,:admin 
 user = User.create([{:name => "Marudhu" , :limit => 4, :regno => '08MS134'}])
 
 
-book = Book.new({:title => 'Harry Potter' , :page => 250 , :count => 10 ,:price => 100})
+book = Book.new({:title => 'Harry Potter' , :page => 250 , :quantity => 10 ,:price => 100})
 
 
 puts book.inspect
@@ -22,7 +22,7 @@ book.tags.build({:name => 'Harry Potter'})
 book.authors.build({:name => 'Rowling'})
 book.save
 
-book = Book.new({:title => 'Basic C' , :page => 150 , :count => 10 ,:price => 30})
+book = Book.new({:title => 'Basic C' , :page => 150 , :quantity => 10 ,:price => 30})
 
 book.categories.build({:name => 'Programming'})
 book.tags.build({:name => 'C'})
@@ -31,7 +31,7 @@ book.save
 
 
 
-book = Book.new( {:title => 'Basic C plus plus' , :page => 170 , :count => 10 ,:price => 50})
+book = Book.new( {:title => 'Basic C plus plus' , :page => 170 , :quantity => 10 ,:price => 50})
 
 book.categories.build({:name => 'Programming'})
 book.tags.build({:name => 'C plus plus'})

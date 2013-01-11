@@ -33,6 +33,10 @@ class AuthorsController < ApplicationController
 	def index
 
 	end
+
+	def edit
+		@author = Author.find(params[:id])
+	end
 	  
 	def show
 		@author = Author.find(params[:id])

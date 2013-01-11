@@ -1,0 +1,17 @@
+<h2> Book </h2>
+
+Title: <%= @book.title %> <br/>
+
+Pages: <%= @book.page %> <br/>
+
+Price: <%= @book.price %> <br/>
+
+Quantity: <%= @book.quantity %> <br/>
+
+Added on: <%= @book.created_at.strftime('%d-%m-%Y') %>
+
+
+<br/>
+
+		<%= link_to "edit" , edit_book_path(@book) %>
+		<%= link_to "delete" , book_path(@book), :method => :delete %>

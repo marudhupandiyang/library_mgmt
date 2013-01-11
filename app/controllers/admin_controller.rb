@@ -13,9 +13,17 @@ class AdminController < ApplicationController
 
   #add book called via post
 def addbook
-  	(Book.find(params[:book_id])).add_book(Integer(params[:book_count]))
-  	flash.now[:notice] = 'Books added Sucessfully'
-  	render :index 
+    book= Book.find(params[:id])
+  	 if book.add_book(Integer(params[:count])) 
+     
+     render :inline => 'Books added Sucessfully'
+
+  	#flash.now[:notice] = 'Books added Sucessfully'
+  	#render :index 
+  else
+     render :inline => 'Books not Added'
+
+  end
 end
 
 

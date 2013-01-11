@@ -1,4 +1,6 @@
 class Book < ActiveRecord::Base
+
+  #associations
 	has_and_belongs_to_many :authors
 	has_and_belongs_to_many :categories
 	has_and_belongs_to_many :tags
@@ -7,9 +9,11 @@ class Book < ActiveRecord::Base
 
   has_many :users ,:through => :loaned_books
 
-  attr_accessible :page, :title, :available, :price ,:count ,:authors
+  #attributes
+  attr_accessible :page, :title, :available, :price ,:quantity ,:category_ids, :tag_ids , :author_ids
 
 
+  #validations
 
   validates :title ,:length => {:minimum => 3 },
                       :presence => true,
@@ -27,7 +31,7 @@ class Book < ActiveRecord::Base
 
   validates :price , :presence => true , :numericality => {:greater_than_or_equal_to => 0}
 
-  after_save :author_increment
+  
   
   #validate that atleast one author must be present
 
@@ -39,24 +43,27 @@ class Book < ActiveRecord::Base
   validates_associated :categories
   validates_associated :tags
 
-  before_save lambda{ 
+  #call backs
+
+  #set authors last book to this..
+  after_save :author_increment
+
+  #check available..
+  before_save do 
     
-                      authors.each do |author|
-                          author.associated = 1
-                      end
-
-                      self.count = 1 if :count.nil?
-                      self.available = self.count
-                      } , :if => :new_record?
+            # authors.each do |author|
+            #     author.associated = 1
+            # end
+          self.available = self.quantity  if self.new_record?
+  end 
 
 
-
-  #add the desired count to the book
-  def add_book(count)
+  #add the desired quantity to the book
+  def add_book(quantity)
     
-      #increase the count and available for loaning
-        self.count += count
-        self.available += count
+      #increase the quantity and available for loaning
+        self.quantity += quantity
+        self.available += quantity
 
         #save the model
         self.save

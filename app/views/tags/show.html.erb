@@ -1,3 +1,6 @@
-<h2> Edit Tag </h2>
+<h2> Tag </h2>
 
-<%= render :partial => 'form' %>
+Name: <%= @tag.name %>
+
+		<%= link_to "edit" , edit_tag_path(@tag) %>
+		<%= link_to "delete" , tag_path(@tag), :method => :delete %>

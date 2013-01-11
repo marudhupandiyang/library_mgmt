@@ -13,3 +13,57 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+
+// Author travesing
+//var search_entry = " <ul>  <% _.each(book,function(entry) { %> <li> <%= entry.title %> &nbsp; &nbsp; <%= entry.price %> <br/> <% _.each(entry.authors,function(auth){ %> <li class='authors'>  <%= auth.name %> </li>  <% }) %></li> <% }) %> </ul>";
+
+var search_entry = " <ul>  <% _.each(book,function(entry) { %> <li> <%= entry.title %> &nbsp; &nbsp; <%= entry.price %> <br/>   <%= entry.authors %> </li> <% }) %> </ul>";
+var admin_search_entry = " <ul>  <% _.each(book,function(entry) { %> <li> <%= entry.title %>  'Add More' </li> <% }) %> </ul>";
+
+function submit_search(){
+
+	$.ajax( {url: '/search' , 
+		
+		data: {query: $("#query").val()},
+		
+		type:"post",
+		dataType: "json",
+		success: function(data){
+				$("#search_result").html();
+//			_.each (data, function(entry){
+					//alert(entry.title);
+					$("#search_result").html(_.template(search_entry,{book : data }));
+
+//			});
+			
+
+		}
+
+	 });
+}
+
+
+
+function addbook(bookid){
+
+	var count = prompt("Enter the Number of Book",0)
+	if (count >0 ){
+
+	$.ajax( {url: '/addbook/'  + bookid, 
+		
+		data: {count: count				
+			},
+		
+		type:"post",
+		success: function(data){
+
+			alert(data)	;
+			//window.reload();
+
+		}
+
+	 });
+
+	}
+}

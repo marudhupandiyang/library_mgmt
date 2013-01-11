@@ -1,7 +1,7 @@
 class Author < ActiveRecord::Base
 	has_and_belongs_to_many :books
-  attr_accessible :lastbook, :name ,:associated
-  attr_accessor :associated
+  attr_accessible :lastbook, :name #,:associated
+  #attr_accessor :associated
 
   validates :name , :presence => true ,
   					:length => {:minimum => 4}
