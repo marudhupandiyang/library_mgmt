@@ -72,6 +72,9 @@ class Transcation < ActiveRecord::Base
     end
 
   end
+
+
+  
   #find the loan id and return the books 
   #increase the appropriate counters
 

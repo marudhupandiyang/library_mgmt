@@ -3,7 +3,9 @@ $(function(){
 
 	$("a").live("click",function(){
 		
-		if (( $(this).html() == "delete"  ) || ( $(this).html() == "Re Issue") || ( $(this).html() == "Return") )  return true ;
+		
+		
+		if (( $(this).html() == "Add Quantity"  ) ||( $(this).html() == "delete"  ) || ( $(this).html() == "Re Issue") || ( $(this).html() == "Return") )  return true ;
 		$("#loading").show();
 		$.get(this.href,null,function(data){ $("#loading").hide(); $("#body_content").html(data)});
 		return false;

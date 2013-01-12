@@ -16,7 +16,7 @@ Library3::Application.routes.draw do
 
   match '/search' => 'books#search' , :as => :search , :via => [:get , :post]
 
-  #match '/addbook/:id' => 'admin#addbook' , :as => :addbook , :via => [:get , :post]
+  match '/addbook/:id' => 'admin#addbook' , :as => :addbook , :via => [:get , :post]
   #match '/issue' => 'admin#issuebook' , :as => :issue  ,:via => [:get]
   match '/return/:id' => 'transcations#returnbook' , :as => :returnbook  ,:via => [:post]
   match '/reissue' => 'transcations#search' , :as => :reissuesearch  ,:via => [:get,:post]

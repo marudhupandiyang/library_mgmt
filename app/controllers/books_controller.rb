@@ -1,4 +1,7 @@
+
 class BooksController < ApplicationController
+
+  #RESTful methods names and their default explanations
 
   def index
     @books = Book.paginate(:page => params[:page] , :per_page => 2)
@@ -63,6 +66,10 @@ class BooksController < ApplicationController
   end
 
 
+  #search form action
+  #call another fucntion to perform search again..
+  #displays the search result
+
   def search
 
     if params[:query].present?
@@ -76,6 +83,7 @@ class BooksController < ApplicationController
 
   end
 
+  #fucntion to searcfh  can change as we wish later..
 
   def search_book(query)
 

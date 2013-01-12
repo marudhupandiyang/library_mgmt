@@ -57,6 +57,7 @@ class Book < ActiveRecord::Base
   end 
 
 
+  
   #add the desired quantity to the book
   def add_book(quantity)
     
@@ -71,6 +72,7 @@ class Book < ActiveRecord::Base
   protected
 
   #each time the book is saved update the author
+  #update the author last book...
   def author_increment
 
     #loop through all the authors and update the lastbook

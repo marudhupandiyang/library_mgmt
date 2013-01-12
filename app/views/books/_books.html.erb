@@ -10,7 +10,7 @@
 
 <% if current_auth.admin == true %>
 
-		<%= link_to 'Add Quantity' , "javascript:addbook(" + book.id.to_s + ")" %>
+		<%= link_to_function 'Add Quantity' , "addbook('#{book.id.to_s}');" %>
 
 		<%= link_to "edit" , edit_book_path(book) %>
 		<%= link_to "delete" , book_path(book), { :method => :delete   ,:remote => true} %>

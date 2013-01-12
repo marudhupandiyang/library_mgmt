@@ -1,5 +1,9 @@
 class TranscationsController < ApplicationController
 
+#RESTful methods names and their default explanations
+#to perform the borrwing , reissuing and retrunin books..
+
+  #show all trancations
   def index
     if current_auth.admin == true
       @transcations = Transcation.paginate(:page => params[:page] , :per_page => 1)
@@ -8,10 +12,12 @@ class TranscationsController < ApplicationController
     end
   end
 
+  #display the form
   def new
     @transcation = Transcation.new
   end
   
+  #issuce the book
   def create
     @transcation = Transcation.new
       
@@ -28,14 +34,17 @@ class TranscationsController < ApplicationController
 
   end
 
+  #wshow the one selected 
   def show
     @transcation = Transcation.find(params[:id])
   end
 
+  #form for reissue
   def edit
     @transcation = Transcation.new
   end
 
+  #reissue function
   def update
     @transcation = Transcation.find(params[:id])
     
@@ -44,6 +53,7 @@ class TranscationsController < ApplicationController
     render :show
   end
 
+  #Cancel teh trancations
   def destroy
     transcation = Transcation.find(params[:id])
 
@@ -59,6 +69,7 @@ class TranscationsController < ApplicationController
 
   end
 
+  #return book action, custom one
   def returnbook
     @transcation = Transcation.find(params[:id])
 
@@ -69,6 +80,9 @@ class TranscationsController < ApplicationController
 
   end
 
+  #seach for reissuing book, redirected form teh edit action after
+  #filling the form
+  
   def search
     if params[:book_id].present? 
       begin

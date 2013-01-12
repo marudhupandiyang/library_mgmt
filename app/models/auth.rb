@@ -13,11 +13,15 @@ class Auth < ActiveRecord::Base
 
   #my own
 
+  #asscociations
+
   has_many :transcations  ,:foreign_key => "user_id"
   has_many :books, :through =>  :transcations
 
+  #my own attrs
   attr_accessible :limit, :name, :regno, :available, :admin, :enabled ,:returned 
 
+  #validations
   validates :name ,:presence => true,
   				  :length => {:minimum => 4}
 
@@ -29,6 +33,7 @@ class Auth < ActiveRecord::Base
 
   before_save :user_defaults
 
+  #set deagult values 
   def user_defaults 
   	if self.new_record?
   		self.available = 4

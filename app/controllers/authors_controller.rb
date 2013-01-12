@@ -1,5 +1,7 @@
 class AuthorsController < ApplicationController
 
+	#RESTful methods names and their default explanations
+
 	def destroy
 		author = Author.find(params[:id])
 		

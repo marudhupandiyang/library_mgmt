@@ -8,6 +8,9 @@ class Author < ActiveRecord::Base
 
   validates :name , :uniqueness => true , :if => :new_record?
 
+  #change the last book to so and so.. so that the author can eaily be linked 
+  #to the book lastly accessed by them
+  
   before_save lambda{ self.lastbook = -1 } , :if => :new_record?
 
 

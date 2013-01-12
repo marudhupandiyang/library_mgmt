@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 
-
+  #RESTful methods names and their default explanations.
   def destroy
     category = Category.find(params[:id])
 

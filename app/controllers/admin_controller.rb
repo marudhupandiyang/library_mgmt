@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
 
 
+
 	#this shows the dashboard
   def index
     if current_auth.admin == true 
@@ -34,6 +35,9 @@ end
 
 
 #call dashboard with dates	
+#fetch the dashboard details for the admin dashboard
+#variables are self explanatroy
+
 def admin_dashboard_Details(dte)
 	@books_borrowed = Transcation.where('startdte >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\'' ).count.to_s
 	@books_returned = Transcation.where('returned = true and returneddoj >= \'' + (dte - 7).strftime("%Y-%m-%d")  + '\'' ).count.to_s
@@ -44,6 +48,9 @@ def admin_dashboard_Details(dte)
 	@active_users = Transcation.where('startdte >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\' and returneddoj >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\'').count.to_s
 end
 
+
+#fetch the dashboard details for the user dashboard
+#variables are self explanatary
 def user_dashboard_Details(dte)
   @books_borrowed = current_auth.transcations.where('startdte >= \'' + (dte - 7).strftime("%Y-%m-%d") + '\'' ).count.to_s
 

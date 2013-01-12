@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
 
+#RESTful methods names and their default explanations
 
   def index
   	@tags = Tag.paginate(:page => params[:page] , :per_page => 1)
