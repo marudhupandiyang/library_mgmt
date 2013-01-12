@@ -18,8 +18,8 @@
 // Author travesing
 //var search_entry = " <ul>  <% _.each(book,function(entry) { %> <li> <%= entry.title %> &nbsp; &nbsp; <%= entry.price %> <br/> <% _.each(entry.authors,function(auth){ %> <li class='authors'>  <%= auth.name %> </li>  <% }) %></li> <% }) %> </ul>";
 
-var search_entry = " <ul>  <% _.each(book,function(entry) { %> <li>  <a href ='/books/" + "<%= entry.id %>" + "' > <%= entry.title %> </a>&nbsp; &nbsp; <%= entry.price %> <br/>   <%= entry.authors %> </li> <% }) %> </ul>";
-var admin_search_entry = " <ul>  <% _.each(book,function(entry) { %> <li> <%= entry.title %>  'Add More' </li> <% }) %> </ul>";
+var search_entry = " <ul> <% _.each(book,function(entry) { %> <li>  <a href ='/books/<%= entry.id %>' > <%= entry.title %> </a> &nbsp; &nbsp; <%= entry.price %> <br/>   <%= entry.authors %> </li> <% }) %> </ul>";
+//var admin_search_entry = " <ul>  <% _.each(book,function(entry) { %> <li> <%= entry.title %>  'Add More' </li> <% }) %> </ul>";
 
 function submit_search(){
 
@@ -33,7 +33,12 @@ function submit_search(){
 				$("#search_result").html();
 //			_.each (data, function(entry){
 					//alert(entry.title);
-					$("#search_result").html(_.template(search_entry,{book : data }));
+					if (data == "") {
+						$("#search_result").html("No data found");
+					}
+					else{
+						$("#search_result").html(_.template(search_entry,{book : data }));
+					}
 
 //			});
 			
@@ -59,7 +64,9 @@ function addbook(bookid){
 		success: function(data){
 
 			alert(data)	;
-			//window.reload();
+			
+			$.get('/books/' + bookid,null,function(data){ $("#loading").hide(); $("#body_content").html(data)});
+			
 
 		}
 

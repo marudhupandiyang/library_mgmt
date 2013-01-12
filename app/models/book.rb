@@ -29,7 +29,7 @@ class Book < ActiveRecord::Base
                                             :only_integer => true}
 
   validates :price , :presence => true , :numericality => {:greater_than_or_equal_to => 0}
-
+  validate  :quantity , :present => true  , :numericality => {:greater_than_or_equal_to => 0}
   
   
   #validate that atleast one author must be present
